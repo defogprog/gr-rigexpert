@@ -13,6 +13,7 @@ templates:
     - set_vga_gain(${vga_gain})
     - set_direct_sampling(${direct_sampling});
     - set_clock_source(${clock_source});
+
 parameters:
 - id: index
   label: 'Device #'
@@ -20,45 +21,44 @@ parameters:
   default: 0
 
 - id: frequency
-  label: 'Frequency (MHz)'
+  label: 'Frequency (Hz)'
   dtype: real
-  default: 100.0
+  default: 100.0e6
 
 - id: samplerate
-  label: 'Sample rate (MHz)'
+  label: 'Sample rate (Hz)'
   dtype: real
-  default: 10.0
-  options: [ 50.0, 40.0, 32.0, 25.0, 20.0, 16.0, 12.5, 10.0, 8.0, 6.4, 6.25, 5.0, 4.0]
+  default: 10.0e6
+  options: [ 50.0e6, 40.0e6, 32.0e6, 25.0e6, 20.0e6, 16.0e6, 12.5e6, 10.0e6, 8.0e6, 6.4e6, 6.25e6, 5.0e6, 4.0e6 ]
+  option_labels: [ 50.0M, 40.0M, 32.0M, 25.0M, 20.0M, 16.0M, 12.5M, 10.0M, 8.0M, 6.4M, 6.25M, 5.0M, 4.0M ]
 
 - id: lna_gain
   label: 'LNA gain'
   dtype: int
   default: 0
-  options: [ 0, 1, 2, 3]
+  options: [ 0, 1, 2, 3 ]
   option_labels: [none, 0 dB, 15 dB, 30 dB]
 
 - id: vga_gain
   label: 'VGA gain'
   dtype: int
   default: 0
-  options: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
-  option_labels: [ 0 dB, 2 dB, 4 dB, 6 dB, 8 dB, 10 dB, 12 dB, 14 dB, 16 dB, 18 dB, 20 dB, 22 dB, 24 dB, 26 dB, 28 dB, 30 dB]
+  options: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ]
+  option_labels: [ 0 dB, 2 dB, 4 dB, 6 dB, 8 dB, 10 dB, 12 dB, 14 dB, 16 dB, 18 dB, 20 dB, 22 dB, 24 dB, 26 dB, 28 dB, 30 dB ]
 
 - id: direct_sampling 
   label: 'Sampling'
   dtype: int
   default: 0
-  options: [0, 1]
-  option_labels: [ "RF input", "HF1/2 direct"]
-
+  options: [ 0, 1 ]
+  option_labels: [ "RF input", "HF1/2 direct" ]
 
 - id: clock_source
   label: 'Clock source'
   dtype: int
   default: 0
-  options: [0, 1]
-  option_labels: [ "Internal", "External 10 MHz"]
-
+  options: [ 0, 1 ]
+  option_labels: [ "Internal", "External 10 MHz" ]
 
 inputs:
 # none

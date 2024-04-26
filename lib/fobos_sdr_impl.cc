@@ -23,19 +23,19 @@ namespace gr
     {
         //======================================================================
         using output_type = gr_complex;
-        fobos_sdr::sptr fobos_sdr::make(int index, 
-                                        double frequency_mhz, 
-                                        double samplerate_mhz,
+        fobos_sdr::sptr fobos_sdr::make(int index,
+                                        double frequency,
+                                        double samplerate,
                                         int lna_gain,
                                         int vga_gain,
                                         int direct_sampling,
                                         int clock_source)
         {
-            printf("make (%d, %f, %f, %d, %d, %d, %d)\n", index, frequency_mhz, samplerate_mhz, lna_gain, vga_gain, direct_sampling, clock_source);
+            printf("make (%d, %f, %f, %d, %d, %d, %d)\n", index, frequency, samplerate, lna_gain, vga_gain, direct_sampling, clock_source);
             return gnuradio::make_block_sptr<fobos_sdr_impl>(
-                                        index, 
-                                        frequency_mhz, 
-                                        samplerate_mhz,
+                                        index,
+                                        frequency,
+                                        samplerate,
                                         lna_gain,
                                         vga_gain,
                                         direct_sampling,
@@ -43,9 +43,9 @@ namespace gr
         }
         //======================================================================
         // The private constructor
-        fobos_sdr_impl::fobos_sdr_impl( int index, 
-                                        double frequency_mhz, 
-                                        double samplerate_mhz,
+        fobos_sdr_impl::fobos_sdr_impl( int index,
+                                        double frequency,
+                                        double samplerate,
                                         int lna_gain,
                                         int vga_gain,
                                         int direct_sampling,
@@ -75,15 +75,15 @@ namespace gr
                 if (result == 0)
                 {
                     printf("open...ok\n");
-                    printf("(%d, %f, %f, %d, %d, %d, %d)\n", index, frequency_mhz, samplerate_mhz, lna_gain, vga_gain, direct_sampling, clock_source);
+                    printf("(%d, %f, %f, %d, %d, %d, %d)\n", index, frequency, samplerate, lna_gain, vga_gain, direct_sampling, clock_source);
 
-                    result = fobos_rx_set_frequency(_dev, frequency_mhz * 1E6, 0);
+                    result = fobos_rx_set_frequency(_dev, frequency, 0);
                     if (result != 0)
                     {
                         printf("fobos_rx_set_frequency - error!\n");
                     }
 
-                    result = fobos_rx_set_samplerate(_dev, samplerate_mhz * 1E6, 0);
+                    result = fobos_rx_set_samplerate(_dev, samplerate, 0);
                     if (result != 0)
                     {
                         printf("fobos_rx_set_samplerate - error!\n");
@@ -247,18 +247,18 @@ namespace gr
             _this->_running = false;
         }
         //======================================================================
-        void fobos_sdr_impl::set_frequency(double frequency_mhz)
+        void fobos_sdr_impl::set_frequency(double frequency)
         {
             double actual;
-            int res = fobos_rx_set_frequency(_dev, frequency_mhz * 1e6, &actual);
-            printf("Setting freq %f MHz, actual %f MHz: %s\n", frequency_mhz, actual / 1E6, res == 0 ? "OK" : "ERR");
+            int res = fobos_rx_set_frequency(_dev, frequency, &actual);
+            printf("Setting freq %f MHz, actual %f MHz: %s\n", frequency / 1e6, actual / 1e6, res == 0 ? "OK" : "ERR");
         }
         //======================================================================
-        void fobos_sdr_impl::set_samplerate(double samplerate_mhz)
+        void fobos_sdr_impl::set_samplerate(double samplerate)
         {
             double actual;
-            int res = fobos_rx_set_samplerate(_dev, samplerate_mhz * 1e6, &actual);
-            printf("Setting sample rate %f MHz, actual %f MHz: %s\n", samplerate_mhz, actual / 1E6, res == 0 ? "OK" : "ERR");
+            int res = fobos_rx_set_samplerate(_dev, samplerate, &actual);
+            printf("Setting sample rate %f MHz, actual %f MHz: %s\n", samplerate / 1e6, actual / 1e6, res == 0 ? "OK" : "ERR");
         }
         //======================================================================
         void fobos_sdr_impl::set_lna_gain(int lna_gain)

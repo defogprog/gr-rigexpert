@@ -50,8 +50,8 @@ namespace gr
             static void thread_proc(fobos_sdr_impl * ctx);
         public:
             fobos_sdr_impl( int index, 
-                            double frequency_mhz, 
-                            double samplerate_mhz,
+                            double frequency,
+                            double samplerate,
                             int lna_gain,
                             int vga_gain,
                             int direct_sampling,
@@ -62,8 +62,8 @@ namespace gr
                      gr_vector_const_void_star& input_items,
                      gr_vector_void_star& output_items);
 
-            void set_frequency(double frequency_mhz);
-            void set_samplerate(double samplerate_mhz);
+            void set_frequency(double frequency);
+            void set_samplerate(double samplerate);
             void set_lna_gain(int lna_gain);
             void set_vga_gain(int vga_gain);
             void set_direct_sampling(int direct_sampling);

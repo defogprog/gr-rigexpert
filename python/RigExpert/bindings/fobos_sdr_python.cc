@@ -13,8 +13,8 @@
 /* If manual edits are made, the following tags should be modified accordingly.    */
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
-/* BINDTOOL_HEADER_FILE(fobos_sdr.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(f06b7121ccf4e00c9fa9af4432643237)                     */
+/* BINDTOOL_HEADER_FILE(fobos_sdr.h)                                               */
+/* BINDTOOL_HEADER_FILE_HASH(c06e836866b18884c6baa326a3891a2a)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -29,63 +29,50 @@ namespace py = pybind11;
 
 void bind_fobos_sdr(py::module& m)
 {
-
     using fobos_sdr    = ::gr::RigExpert::fobos_sdr;
-
 
     py::class_<fobos_sdr, gr::sync_block, gr::block, gr::basic_block,
         std::shared_ptr<fobos_sdr>>(m, "fobos_sdr", D(fobos_sdr))
 
         .def(py::init(&fobos_sdr::make),
            py::arg("index") = 0,
-           py::arg("frequency") = 100.0,
-           py::arg("samplerate") = 10.0,
+           py::arg("frequency") = 1.0E+8,
+           py::arg("samplerate") = 1.0E+7,
            py::arg("lna_gain") = 0,
            py::arg("vga_gain") = 0,
            py::arg("direct_sampling") = 0,
            py::arg("clock_source") = 0,
            D(fobos_sdr,make)
         )
-        
-        .def("set_frequency",&fobos_sdr::set_frequency,       
+
+        .def("set_frequency",&fobos_sdr::set_frequency,
             py::arg("frequency"),
             D(fobos_sdr,set_frequency)
         )
-       
-        .def("set_samplerate",&fobos_sdr::set_samplerate,       
+
+        .def("set_samplerate",&fobos_sdr::set_samplerate,
             py::arg("samplerate"),
             D(fobos_sdr,set_samplerate)
         )
 
-        .def("set_lna_gain",&fobos_sdr::set_lna_gain,       
+        .def("set_lna_gain",&fobos_sdr::set_lna_gain,
             py::arg("lna_gain"),
             D(fobos_sdr,set_lna_gain)
         )
 
-        .def("set_vga_gain",&fobos_sdr::set_vga_gain,       
+        .def("set_vga_gain",&fobos_sdr::set_vga_gain,
             py::arg("vga_gain"),
             D(fobos_sdr,set_vga_gain)
         )
-        .def("set_direct_sampling",&fobos_sdr::set_direct_sampling,       
+
+        .def("set_direct_sampling",&fobos_sdr::set_direct_sampling,
             py::arg("direct_sampling"),
             D(fobos_sdr,set_direct_sampling)
         )
 
-        .def("set_clock_source",&fobos_sdr::set_clock_source,       
+        .def("set_clock_source",&fobos_sdr::set_clock_source,
             py::arg("clock_source"),
             D(fobos_sdr,set_clock_source)
-        )        
+        )
         ;
-
-
-
-
 }
-
-
-
-
-
-
-
-
